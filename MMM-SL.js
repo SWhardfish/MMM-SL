@@ -34,11 +34,20 @@ Module.register("MMM-SL", {
   },
 
   getHeader: function () {
-    if (this.config.showLastUpdatedAlways && this.config.lastUpdatedInTitle) {
-      let time = this.lastUpdated ? moment(this.lastUpdated).format("HH:mm:ss") : "Updating...";
-      return `<span class='bright'>${this.data.header}</span> <span class='dimmed'><i class='fa fa-refresh'></i> ${time}</span>`;
+    let dotColor = "red"; // Default to red for outdated data
+    if (this.lastUpdated) {
+        let lastUpdateMoment = moment(this.lastUpdated);
+        let now = moment();
+        let diffMinutes = now.diff(lastUpdateMoment, "minutes");
+        if (diffMinutes <= 5) {
+        dotColor = "green"; // Set to green if data is fresh
+        }
     }
-    return `<span class='bright'>${this.data.header}</span>`;
+    return `
+        <span class='bright'>${this.data.header}</span>
+        <span class='dimmed'>
+        <i class='fa fa-circle' style='color: ${dotColor};'></i>
+        </span>`;
   },
 
   getDom: function () {
