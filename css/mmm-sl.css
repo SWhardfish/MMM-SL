@@ -2,3 +2,11 @@
   font-size: 75%;
   line-height: 75%;
 }
+
+.module-header {
+  font-size: 1em; /* Match default MagicMirror header size */
+  font-weight: normal; /* Remove extra boldness */
+  text-transform: none; /* Disable forced uppercase, if not needed */
+  margin: 0; /* Align margins with other module headers */
+  padding: 0; /* Align padding with other module headers */
+}
