@@ -1,5 +1,5 @@
 var NodeHelper = require("node_helper");
-var request = require("request");
+var axios = require("axios");
 module.exports = NodeHelper.create({
 
   start: function() {
@@ -26,24 +26,20 @@ module.exports = NodeHelper.create({
 
   makeRequest: function(siteId, apiUrl) {
     var self = this;
-    request({
-      url: apiUrl,
-      method: "GET"
-    }, function(error, response, body) {
-
-      if (!error && response.statusCode === 200) {
+    axios.get(apiUrl)
+      .then(function(response) {
         var id = siteId;
-        var newBody = JSON.parse(body);
+        var newBody = response.data;
         var tmp = {
           id: id,
           result: newBody
         };
         // console.log(id+" " + self.name + ": ",tmp);
-        self.sendSocketNotification("SL_REALTIME_DATA",tmp);
-      } else {
-        console.log(self.name + ": ", error);
-      }
-    });
+        self.sendSocketNotification("SL_REALTIME_DATA", tmp);
+      })
+      .catch(function(error) {
+        console.log(self.name + ": ", error.message || error);
+      });
   },
 
   getParams: function(siteId) {

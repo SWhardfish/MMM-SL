@@ -1,12 +1,120 @@
+.align-left { text-align: left; }
+.align-right { text-align: right; }
+
 .empty-row {
   font-size: 75%;
   line-height: 75%;
 }
 
 .module-header {
-  font-size: 1em; /* Match default MagicMirror header size */
+  font-size: 15px; /* Match default MagicMirror header size */
   font-weight: normal; /* Remove extra boldness */
   text-transform: none; /* Disable forced uppercase, if not needed */
   margin: 0; /* Align margins with other module headers */
   padding: 0; /* Align padding with other module headers */
 }
+
+/* Deviation Container */
+.deviation-container {
+  color: #ff4444;
+  font-size: 15px;
+  height: 54px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.deviation-marquee {
+  position: absolute;
+  width: 100%;
+  animation: scroll-up linear infinite;
+}
+
+.deviation-header {
+  font-size: 17px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+.deviation-item {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 68, 68, 0.2);
+}
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  95% {
+    transform: translateY(-100%);
+  }
+  95.1%, 100% {
+    transform: translateY(0);
+  }
+}
+
+/* Full-width table support */
+.MMM-SL table {
+  width: 100%;
+  table-layout: auto;
+}
+
+/* Ensure cells scale properly instead of using fixed pixel widths */
+.MMM-SL table td {
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+/* Icon column - minimal width */
+.MMM-SL table td:first-child {
+  width: 5%;
+  min-width: 40px;
+}
+
+/* Line number column - small but flexible */
+.MMM-SL table td:nth-child(2) {
+  width: 10%;
+  min-width: 60px;
+}
+
+/* Destination column - takes remaining space */
+.MMM-SL table td:nth-child(3) {
+  width: auto;
+  max-width: none;
+}
+
+/* Time/countdown column - fixed small width */
+.MMM-SL table td:nth-child(4) {
+  width: 15%;
+  min-width: 100px;
+  text-align: right;
+}
+
+/* Make header rows span properly */
+.MMM-SL table td[colspan] {
+  width: 100% !important;
+}
+
+/* Stop name header styling - underline only the text, not full width */
+.MMM-SL table td.stop-header {
+  padding: 12px 0 8px 0;
+  border-bottom: none !important;
+}
+
+.MMM-SL .stop-name-wrapper {
+  display: inline-block;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 4px;
+}
+
+.MMM-SL .stop-name-wrapper .fa-map-marker {
+  margin-right: 8px;
+  color: #ff4444;
+}
+
